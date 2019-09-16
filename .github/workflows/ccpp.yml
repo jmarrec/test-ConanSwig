@@ -1,0 +1,19 @@
+name: C/C++ CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: little test
+      run: echo "python3=$(which python3)"
+    - name: install conan
+      run: pip install --upgrade pip && pip install conan
+    - name: configure
+      run: mkdir build && cd build/ && cmake -DCMAKE_BUILD_TYPE=Release ..
+    - name: make
+      run: make -j
