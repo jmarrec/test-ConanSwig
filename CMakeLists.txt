@@ -108,6 +108,8 @@ endif()
 add_custom_command(
   OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/SWIGRubyRuntime.hxx"
   COMMAND "${SWIG_EXECUTABLE}"
+          "-I${CONAN_SWIG_INSTALLER_ROOT}/share/swig/4.0.0/ruby"
+          "-I${CONAN_SWIG_INSTALLER_ROOT}/share/swig/4.0.0"
           "-v"
           "-ruby"
           -external-runtime "${CMAKE_CURRENT_BINARY_DIR}/SWIGRubyRuntime.hxx"
@@ -117,6 +119,7 @@ message("ENV{PATH}=$ENV{PATH}")
 message("ENV{SWIG_LIB}=$ENV{SWIG_LIB}")
 message("SWIG_LIB=${SWIG_LIB}")
 message("CONAN_ENV_VARS=${CONAN_ENV_VARS}")
+message("CONAN_SWIG_INSTALLER_ROOT=${CONAN_SWIG_INSTALLER_ROOT}")
 
 add_executable(test
   main.cpp
