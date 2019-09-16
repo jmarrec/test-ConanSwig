@@ -17,15 +17,9 @@ jobs:
       with:
         python-version: '3.7' # Version range or exact version of a Python version to use, using semvers version range syntax.
         architecture: 'x64' # (x64 or x86)
-    - name: little test
-      run: |
-          echo "python=$(which python)"
-          echo "pip=$(which pip)"
-          echo "python3=$(which python3)"
-          echo "pip3=$(which pip3)"
     - name: install conan
       run:  pip install conan
-    - name: configure
+    - name: Configure via CMake
       run: mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release ..  # Doesn't appear to work on Ubuntu: cmake -S . -B build/ -DCMAKE_BUILD_TYPE=Release
-    - name: make (ensure we can export runtime)
+    - name: make (ensure we can export SWIG runtime)
       run: cmake --build build/ -j --target ExportRunTime
