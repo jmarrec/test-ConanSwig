@@ -111,11 +111,13 @@ if(NOT SWIG_EXECUTABLE)
   message(FATAL_ERROR "Couldn't find swig, which shouldn't happen. CONAN_BIN_DIRS_SWIG_INSTALLER=${CONAN_BIN_DIRS_SWIG_INSTALLER}")
 endif()
 
+# The conan-provided binary has a built-in swiglib (`swig -swiglib`) that points to the build box on which it was built, which is problematic for us.
+set(SWIG_LIB "${CONAN_SWIG_INSTALLER_ROOT}/share/swig/4.0.0")
+
 add_custom_command(
   OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/SWIGRubyRuntime.hxx"
-  COMMAND "${SWIG_EXECUTABLE}"
-          "-I${CONAN_SWIG_INSTALLER_ROOT}/share/swig/4.0.0/ruby"
-          "-I${CONAN_SWIG_INSTALLER_ROOT}/share/swig/4.0.0"
+  COMMAND ${CMAKE_COMMAND} -E env SWIG_LIB="${SWIG_LIB}"
+          "${SWIG_EXECUTABLE}"
           "-v"
           "-ruby"
           -external-runtime "${CMAKE_CURRENT_BINARY_DIR}/SWIGRubyRuntime.hxx"
