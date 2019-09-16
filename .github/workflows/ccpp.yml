@@ -23,5 +23,5 @@ jobs:
       run:  pip install --upgrade pip && pip install conan
     - name: configure
       run: mkdir build && cd build/ && cmake -DCMAKE_BUILD_TYPE=Release ..
-    - name: make
-      run: cd build/ && make -j
+    - name: make (ensure we can export runtime)
+      run: cd build/ && make -j ExportRunTime

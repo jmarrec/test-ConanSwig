@@ -127,7 +127,11 @@ message("SWIG_LIB=${SWIG_LIB}")
 message("CONAN_ENV_VARS=${CONAN_ENV_VARS}")
 message("CONAN_SWIG_INSTALLER_ROOT=${CONAN_SWIG_INSTALLER_ROOT}")
 
+
+add_custom_target(ExportRunTime
+  DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/SWIGRubyRuntime.hxx"
+)
+
 add_executable(test
   main.cpp
-  "${CMAKE_CURRENT_BINARY_DIR}/SWIGRubyRuntime.hxx"
   )
