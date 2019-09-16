@@ -2,10 +2,14 @@ name: C/C++ CI
 
 on: [push]
 
+strategy:
+  matrix:
+    os: [ubuntu-latest, windows-latest, macOS-latest]
+
+runs-on: ${{ matrix.os }}
+
 jobs:
   build:
-
-    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
