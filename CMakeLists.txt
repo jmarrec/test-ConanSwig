@@ -92,6 +92,12 @@ if ("${MODULE_ROOT}" STREQUAL "")
 endif()
 
 
+# Search first in the binary dir, where conan will install finders, then
+# search for modules in the root dir to override cmake ones
+# Start with ROOT, then PROJECT_BINARY_DIR
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_BINARY_DIR} ${PROJECT_BINARY_DIR}" "${PROJECT_SOURCE_DIR}/CMake")
+include_directories("${CMAKE_CURRENT_BINARY_DIR}")
+
 #######################################################################
 #                               S W I G                               #
 #######################################################################
