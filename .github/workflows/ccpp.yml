@@ -2,10 +2,6 @@ name: C/C++ CI
 
 on: [push]
 
-
-
-
-
 jobs:
   build:
 
@@ -13,6 +9,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
+      fail-fast: false
 
     steps:
     - uses: actions/checkout@v1
@@ -27,7 +24,7 @@ jobs:
           echo "python3=$(which python3)"
           echo "pip3=$(which pip3)"
     - name: install conan
-      run:  pip install --upgrade pip && pip install conan
+      run:  pip install --user conan
     - name: configure
       run: cmake -S . -B build/ -DCMAKE_BUILD_TYPE=Release
     - name: make (ensure we can export runtime)
