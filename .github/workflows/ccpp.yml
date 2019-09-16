@@ -6,13 +6,21 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v1
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.7' # Version range or exact version of a Python version to use, using semvers version range syntax.
+        architecture: 'x64' # (x64 or x86)
     - name: little test
-      run: echo "python3=$(which python3)"
+      run: |
+          echo "python=$(which python)"
+          echo "pip=$(which pip)"
+          echo "python3=$(which python3)"
+          echo "pip3=$(which pip3)"
     - name: install conan
-      run:  python3 -m pip install --upgrade pip && python3 -m pip install conan
+      run:  pip install --upgrade pip && pip install conan
     - name: configure
       run: mkdir build && cd build/ && cmake -DCMAKE_BUILD_TYPE=Release ..
     - name: make
