@@ -26,6 +26,8 @@ jobs:
     - name: install conan
       run:  pip install conan
     - name: configure
-      run: mkdir build/ && cd build/ && cmake -DCMAKE_BUILD_TYPE=Release ..  # Doesn't appear to work on Ubuntu: cmake -S . -B build/ -DCMAKE_BUILD_TYPE=Release
+      run: mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release ..  # Doesn't appear to work on Ubuntu: cmake -S . -B build/ -DCMAKE_BUILD_TYPE=Release
     - name: make (ensure we can export runtime)
       run: cmake --build build/ -j --target ExportRunTime
+    - name: Try again...
+      run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
